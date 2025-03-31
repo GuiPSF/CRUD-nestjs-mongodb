@@ -29,4 +29,5 @@ export class UserService{
     deleteUser(id: string){
         return this.userModel.findByIdAndDelete(id);
     }
+
 }

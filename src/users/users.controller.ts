@@ -1,14 +1,16 @@
-import { Body, Controller, Delete, Get, HttpException, Param, Patch, Post, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, Param, Patch, Post, UseGuards, UsePipes, ValidationPipe } from "@nestjs/common";
 import { UserService } from "./users.service";
 import { CreateUserDto } from "./dto/CreateUser.dto";
 import mongoose from "mongoose";
 import { UpdateUserDto } from "./dto/UpdateUser.dto";
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller('users')
 export class UserController{
 
     constructor(private userService: UserService){}
     @Post()
+    @UseGuards(AuthGuard())
     @UsePipes(new ValidationPipe)
     createUser(@Body() createUserDto: CreateUserDto){
         console.log(createUserDto)
